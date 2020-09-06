@@ -15,3 +15,6 @@ We would like to make it so mutliple users can use this at the same time, creati
 This will solve the age old question of "who did chores this week". Family members, room mates, college students, cleaning professionals can all uses this as a score card to know who has done what around the house/business.
 
 MVP: The user can build a list of their chores, customize the points earned from each. The user can see the chores list and check that they are complete. They will see the points gained and how close they are to the goal.
+
+link to user stories:
+https://trello.com/b/xqn5GBnJ/201-final-project
