@@ -71,8 +71,19 @@ function fillToDo(event) {
 
   addedChores.addItem(choreName, daySelection);
   //console.log(addedChores); this works
+  postToDoList();
 }
 //-----------------------------------------------
+
+function postToDoList () {
+  var ul = document.getElementById('todo');
+  var item = addedChores.item;
+  for (var i = 0; i < item.length; i++) {
+    var li = document.createElement('li');
+    li.textContent = `${item[i].chores} should be done ${item[i].day}`;
+    ul.append(li);
+  }
+}
 
 //event listener for filling the to-do list
 choresForm.addEventListener('submit', fillToDo);
