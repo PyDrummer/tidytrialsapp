@@ -1,0 +1,10 @@
+/* About Us Styling */
+
+body section{ 
+  /* includes all 4 bios - text -  */
+  background-color: cadetblue;
+  width: 25%;
+}
+body section img{
+  width: 100px;
+}
