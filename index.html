@@ -28,28 +28,25 @@
     </canvas>
   </section>
   <section>
-    <form action="catalog">
+    <form id="chores_form">
       <fieldset>
-        <label>
-          <span>Chore</span>
-          <select id="chores"></select>
-          <span>day</span>
-          <select id="day"></select>
-        </label>
+        <label>Chore</label>
+        <select id="chores_index"></select>
+        <label>day</label>
+        <select id="day_index"></select>
+        <input type="submit" value="Add to list">
       </fieldset>
     </form>
   </section>
   <section>
-    <ul>
-      <li></li>
-    </ul>
+    <ul id="todo"></ul>
   </section>
   <section>
     <ul>
       <li></li>
     </ul>
   </section>
-  <script src="../js/app.js"></script>
+  <script src="./js/app.js"></script>
 </body>
 
 </html>
