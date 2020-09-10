@@ -9,17 +9,26 @@
 /* #EBE8E3 White */
 
 
-/* Nav Bar All Pages */
 html{
   background-color: #EBE8E3;
 }
-h1{ 
+/* Nav Bar All Pages */
+h1{
+  font-family: 'Faster One', cursive;
+  color: #F2B441;
+  font-size: 90px;
+  text-align: center;
+  background-color: #4374C5;
+  width: 1000px;
+  text-shadow: 2px 2px 2px black;
+  box-shadow: 2px 3px 2px black;
+}
+h2{ 
   /* About Us name font - Look for cool font later */
   float: right;
   font-size: 55px;
   padding: 20px;
   font-family: 'Racing Sans One', cursive;
-  font-style: italic;
   color: #F22222;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color:#F2B441;
@@ -74,4 +83,13 @@ body section img{
   width: 100px;
   box-shadow: 2px 2px 2px black;
   /* border-style: solid #F2B441; */
+}
+
+body section img{
+  
+
+}
+
+body section img :hover{
+  height: 200px;
 }

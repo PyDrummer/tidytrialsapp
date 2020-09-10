@@ -6,8 +6,6 @@ var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'S
 var choreList = document.getElementById('chores_index');
 var dayList = document.getElementById('day_index');
 var choresForm = document.getElementById('chores_form');
-var ul = document.getElementById('todo');
-var liRef = 0;
 
 //login function
 function login() {
@@ -34,7 +32,6 @@ function registerUser() {
   localStorage.setItem('users', stringUers);
 }
 
-
 // chore constructor
 var Chores = function (chore, points) {
   this.chore = chore;
@@ -60,7 +57,6 @@ function fillDropDown() {
     var option = document.createElement('option');
     option.textContent = choreArray[i].chore;
     choreList.append(option);
-    
     option = document.createElement('option');
     option.textContent = days[i];
     dayList.append(option);
@@ -93,6 +89,7 @@ ChoreAndDay.prototype.addItem = function (chores, day) {
 var addedChores = new ChoreAndDay([]);
 
 function fillToDo(event) {
+  event.preventDefault();
   var choreName = event.target.chores_index.value;
   console.log(choreName);
   var daySelection = event.target.day_index.value;
@@ -102,6 +99,9 @@ function fillToDo(event) {
   postToDoList();
 }
 //-----------------------------------------------
+
+var ul = document.getElementById('todo');
+var liRef = 0;
 var item = addedChores.item;
 function postToDoList () {
   var li = document.createElement('li');
