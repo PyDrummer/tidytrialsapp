@@ -32,7 +32,6 @@ function registerUser() {
   localStorage.setItem('users', stringUers);
 }
 
-
 // chore constructor
 var Chores = function (chore, points) {
   this.chore = chore;
@@ -100,6 +99,7 @@ function fillToDo(event) {
   postToDoList();
 }
 //-----------------------------------------------
+
 var ul = document.getElementById('todo');
 var liRef = 0;
 var item = addedChores.item;
