@@ -1,10 +1,36 @@
 'use strict';
 
+var users = [];
 var choreArray = [];
 var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 var choreList = document.getElementById('chores_index');
 var dayList = document.getElementById('day_index');
 var choresForm = document.getElementById('chores_form');
+
+//login function
+function login() {
+  var username = document.getElementById('username').value;
+  for (var i = 0; i < users.length; i++) {
+    if (username === users[i].username) {
+      console.log(username + ' is logged in');
+      return;
+    }
+  }
+  console.log('not a valid username');
+}
+
+
+//reigster new User function
+function registerUser() {
+  var registerUser = document.getElementById('newUser').value;
+  var newUser = {
+    username: registerUser
+  };
+  users.push(newUser);
+  //console.log(users);
+  var stringUers = JSON.stringify(users);
+  localStorage.setItem('users', stringUers);
+}
 
 // chore constructor
 var Chores = function (chore, points) {
@@ -31,7 +57,6 @@ function fillDropDown() {
     var option = document.createElement('option');
     option.textContent = choreArray[i].chore;
     choreList.append(option);
-
     option = document.createElement('option');
     option.textContent = days[i];
     dayList.append(option);
@@ -64,25 +89,25 @@ ChoreAndDay.prototype.addItem = function (chores, day) {
 var addedChores = new ChoreAndDay([]);
 
 function fillToDo(event) {
+  event.preventDefault();
   var choreName = event.target.chores_index.value;
   console.log(choreName);
   var daySelection = event.target.day_index.value;
   console.log(daySelection);
-
   addedChores.addItem(choreName, daySelection);
   //console.log(addedChores); this works
   postToDoList();
 }
 //-----------------------------------------------
 
+var ul = document.getElementById('todo');
+var liRef = 0;
+var item = addedChores.item;
 function postToDoList () {
-  var ul = document.getElementById('todo');
-  var item = addedChores.item;
-  for (var i = 0; i < item.length; i++) {
-    var li = document.createElement('li');
-    li.textContent = `${item[i].chores} should be done ${item[i].day}`;
-    ul.append(li);
-  }
+  var li = document.createElement('li');
+  li.textContent = `${item[liRef].chores} should be done ${item[liRef].day}`;
+  ul.append(li);
+  liRef++;
 }
 
 //event listener for filling the to-do list
