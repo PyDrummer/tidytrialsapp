@@ -5,6 +5,8 @@ var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'S
 var choreList = document.getElementById('chores_index');
 var dayList = document.getElementById('day_index');
 var choresForm = document.getElementById('chores_form');
+var ul = document.getElementById('todo');
+var liRef = 0;
 
 // chore constructor
 var Chores = function (chore, points) {
@@ -31,7 +33,7 @@ function fillDropDown() {
     var option = document.createElement('option');
     option.textContent = choreArray[i].chore;
     choreList.append(option);
-
+    
     option = document.createElement('option');
     option.textContent = days[i];
     dayList.append(option);
@@ -68,21 +70,18 @@ function fillToDo(event) {
   console.log(choreName);
   var daySelection = event.target.day_index.value;
   console.log(daySelection);
-
   addedChores.addItem(choreName, daySelection);
   //console.log(addedChores); this works
   postToDoList();
 }
 //-----------------------------------------------
 
+var item = addedChores.item;
 function postToDoList () {
-  var ul = document.getElementById('todo');
-  var item = addedChores.item;
-  for (var i = 0; i < item.length; i++) {
-    var li = document.createElement('li');
-    li.textContent = `${item[i].chores} should be done ${item[i].day}`;
-    ul.append(li);
-  }
+  var li = document.createElement('li');
+  li.textContent = `${item[liRef].chores} should be done ${item[liRef].day}`;
+  ul.append(li);
+  liRef++;
 }
 
 //event listener for filling the to-do list
