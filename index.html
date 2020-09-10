@@ -6,18 +6,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/reset.css">
   <link rel="stylesheet" href="../css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap" rel="stylesheet">
 
   <title>Home</title>
 </head>
 <header>
   <nav>
     <ul>
-      <li><a href="../html/index.html">Home</a></li>
+      <li><a href="/index.html">Home</a></li>
       <li><a href="../html/aboutus.html">About Us</a></li>
       <li><a href="../html/customize.html">Custom Page</a></li>
     </ul>
   </nav>
-  <section><a href="#">Log In</section>
+  <form>
+    <h2>login</h2>
+    <input id ='username'>
+    <button type="button" onclick="login()">login</button>
+  </form>
+  <form>
+    <h2>NewUser</h2>
+    <input id ='newUser'>
+    <button type="button" onclick="registerUser()">Create</button>
+  </form>
 </header>
 
 <body>
