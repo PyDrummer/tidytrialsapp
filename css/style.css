@@ -7,59 +7,71 @@
 /* #D95829 Orange */
 /* #F22222 Red */
 /* #EBE8E3 White */
+
+
 /* Nav Bar All Pages */
-
+html{
+  background-color: #EBE8E3;
+}
 h1{ 
-  /* Main Title Header - Look for cool font later */
+  /* About Us name font - Look for cool font later */
   float: right;
-  font-size: 35px;
-  padding: 1px;
-
+  font-size: 55px;
+  padding: 20px;
+  font-family: 'Racing Sans One', cursive;
+  font-style: italic;
+  color: #F22222;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color:#F2B441;
+  text-shadow: 2px 2px 2px black;
+  /* margin-right: 40px; */
 }
 nav {
   /* includes links to custom, about, and home pages */
   height: 40px;
   background-color:#4374C5;
   margin: auto;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  box-shadow: 2px 3px 2px black;
 }
-
 nav a{
   /* links in nav bar */
-  /* background-color: coral; */
   float: left;
   text-align: center;
   text-decoration: none;
   font-size: 20px;
-  margin-top: 7px;
-  margin-left: 10px;
-  padding: 3px;
+  padding: 10px;
   color: #F2B441;
 }
-nav a :hover {
-  /* Hover not working yet */
-  background-color: plum;
+a:hover {
+  background-color:#F22222;
 }
+
 
 /* About Us 4 Section */
 
 body{
   /* body container */
-  width: 960px;
+  width: 1000px;
   margin-top:10px ;
   margin: auto;
   
 }
 body section{ 
   /* includes all 4 bios - text - img */
-  background-color: cadetblue;
-  width: 49%;
+  background-color: #F29A2E;
+  width: 490px;
   float: left;
   padding: 2px;
-  margin: 1px;
+  margin: 3px;
+  box-shadow: 2px 3px 2px black;
 
   /* border-style: solid ;
   border-width: 1px; */
 }
 body section img{
   width: 100px;
+  box-shadow: 2px 2px 2px black;
+  /* border-style: solid #F2B441; */
 }
