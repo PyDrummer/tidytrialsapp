@@ -9,6 +9,7 @@
 /* #F22222 Red */
 /* #EBE8E3 White */
 
+
 html{
   background-color: #EBE8E3;
   font-family: 'Racing Sans One';
@@ -84,10 +85,14 @@ body section img{
 
 /* hover elements */
 a:hover {
-  box-shadow:inset 0 0 0 5px #F22222;
   font-style: italic;
   font-family: 'Faster One', cursive;
   text-shadow: 2px 2px 2px black;
+  -webkit-transform: scale(1.3);
+  -ms-transform: scale(1.3);
+  transform: scale(1.3);
+  
+  
 
 }
 .bio:hover{
@@ -101,5 +106,7 @@ a:hover {
 form{
   float: right;
   height: 40px;
-  /* background-color: chartreuse; */
+  background-color: chartreuse;
 }
+
+
