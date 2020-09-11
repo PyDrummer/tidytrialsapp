@@ -7,7 +7,7 @@ var dayList = document.getElementById('day_index');
 var choresForm = document.getElementById('chores_form');
 var ul = document.getElementById('todo');
 var sectionTodo = document.getElementById('section_todo');
-
+var completedUl = document.getElementById('completed_ul');
 var userPoints = 0; // this will be part of the constructor.
 
 
@@ -53,6 +53,8 @@ fillDropDown();
 var AddDayToChores = function (chores, day) {
   this.chores = chores;
   this.day = day;
+  this.content = [];
+  this.id = [];
 };
 
 // item is a blank array.
@@ -88,33 +90,51 @@ var idName;
 function postToDoList() {
   var li = document.createElement('li');
   for (var i = 0; i < item.length; i++) {
-    idName = item[i].chores;
+    idName = item[i].chores + i;
   }
   li.setAttribute('id', idName);
   li.textContent = `${item[liRef].chores} should be done ${item[liRef].day}`;
+  item[liRef].content.push(`${item[liRef].chores} should be done ${item[liRef].day}`);
+  item[liRef].id.push(idName);
   ul.append(li);
   liRef++;
 }
 
 //----------------------------- We left off here 9.9.2020
+var evId;
 function handleToDoCompleted(event) {
   // thing 1, take it out
   // thing 2, get the chore (name) and the choreArray.chore, grab the points assoiacted with that. Send that to a points global variable.
-
+  evId = event.target.id;
   for (var i = 0; i < addedChores.item.length; i++) {
-    if (event.target.id === addedChores.item[i].chores) {
+    // console.log(event.target.id);
+    if (event.target.id == item[i].id) {
       //console.log(`item instance chore name is, ${addedChores.item[i].chores}`);
+      // console.log(i);
       break;
     }
   }
   for (var j = 0; j < choreArray.length; j++) {
     if (addedChores.item[i].chores === choreArray[j].chore) {
-      console.log(`item instance chore name is, ${addedChores.item[i].chores} choreArray is at ${choreArray[j].chores}`);
+      // console.log(`item instance chore name is, ${addedChores.item[i].chores} choreArray is at ${choreArray[j].chore}`);
+      moveToCompleted();
       userPoints += choreArray[j].points;
-      console.log(`user points currently at ${userPoints}`);
+      // console.log(`user points currently at ${userPoints}`);
       break;
     }
   }
+}
+
+var use;
+function moveToCompleted () {
+  for (var i = 0; i < item.length; i++) {
+    if (item[i].id == evId) {
+      use = item[i].content;
+    }
+  }
+  var li = document.createElement('li');
+  li.textContent = use;
+  completedUl.append(li);
 }
 
 //event listener for filling the to-do list
