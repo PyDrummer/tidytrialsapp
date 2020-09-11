@@ -1,7 +1,5 @@
 'use strict';
 
-// Most of the global variables here.
-var users = [];
 var choreArray = [];
 var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 var choreList = document.getElementById('chores_index');
@@ -12,30 +10,8 @@ var sectionTodo = document.getElementById('section_todo');
 
 var userPoints = 0; // this will be part of the constructor.
 
-//login function
-function login() {
-  var username = document.getElementById('username').value;
-  for (var i = 0; i < users.length; i++) {
-    if (username === users[i].username) {
-      console.log(username + ' is logged in');
-      return;
-    }
-  }
-  console.log('not a valid username');
-}
 
 
-//reigster new User function
-function registerUser() {
-  var registerUser = document.getElementById('newUser').value;
-  var newUser = {
-    username: registerUser
-  };
-  users.push(newUser);
-  //console.log(users);
-  var stringUers = JSON.stringify(users);
-  localStorage.setItem('users', stringUers);
-}
 
 // chore constructor
 var Chores = function (chore, points) {
