@@ -12,7 +12,7 @@
 
 html{
   background-color: #EBE8E3;
-  font-family: 'Racing Sans One';
+
 }
 /* Nav Bar All Pages */
 h1{
@@ -109,4 +109,8 @@ form{
   background-color: chartreuse;
 }
 
-
+#race{
+  background-color: chartreuse;
+  width: 900px;
+  height: 40px;
+}
