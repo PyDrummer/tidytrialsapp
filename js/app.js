@@ -1,36 +1,14 @@
 'use strict';
 
-var users = [];
+
 var choreArray = [];
 var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 var choreList = document.getElementById('chores_index');
 var dayList = document.getElementById('day_index');
 var choresForm = document.getElementById('chores_form');
 
-//login function
-function login() {
-  var username = document.getElementById('username').value;
-  for (var i = 0; i < users.length; i++) {
-    if (username === users[i].username) {
-      console.log(username + ' is logged in');
-      return;
-    }
-  }
-  console.log('not a valid username');
-}
 
 
-//reigster new User function
-function registerUser() {
-  var registerUser = document.getElementById('newUser').value;
-  var newUser = {
-    username: registerUser
-  };
-  users.push(newUser);
-  //console.log(users);
-  var stringUers = JSON.stringify(users);
-  localStorage.setItem('users', stringUers);
-}
 
 // chore constructor
 var Chores = function (chore, points) {
