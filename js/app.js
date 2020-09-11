@@ -6,7 +6,6 @@ var choreList = document.getElementById('chores_index');
 var dayList = document.getElementById('day_index');
 var choresForm = document.getElementById('chores_form');
 var ul = document.getElementById('todo');
-var sectionTodo = document.getElementById('section_todo');
 var completedUl = document.getElementById('completed_ul');
 var userPoints = 0; // this will be part of the constructor.
 
