@@ -83,6 +83,11 @@ var liRef = 0;
 var item = addedChores.item;
 function postToDoList () {
   var li = document.createElement('li');
+  var idName;
+  for (var i = 0; i < item.length; i++) {
+    idName = item[i].chores;
+  }
+  li.setAttribute('id', idName);
   li.textContent = `${item[liRef].chores} should be done ${item[liRef].day}`;
   ul.append(li);
   liRef++;
