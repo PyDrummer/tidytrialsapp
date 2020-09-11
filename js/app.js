@@ -117,7 +117,7 @@ function handleToDoCompleted(event) {
     if (item[i].chores === choreArray[j].chore) {
       console.log(`item instance chore name is, ${addedChores.item[i].chores} choreArray is at ${choreArray[j].chore}`);
       moveToCompleted();
-      userPoints += choreArray[j].points;
+      userPoints += choreArray[j].points; // maybe turn this into calling a fnction there?
       var toBeRemoved = document.getElementById(evId);
       toBeRemoved.innerHTML = '';
       console.log(`user points currently at ${userPoints}`);
