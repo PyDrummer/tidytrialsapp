@@ -5,11 +5,10 @@ var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'S
 var choreList = document.getElementById('chores_index');
 var dayList = document.getElementById('day_index');
 var choresForm = document.getElementById('chores_form');
+var sectionTodo = document.getElementById('section_todo');
 var ul = document.getElementById('todo');
 var completedUl = document.getElementById('completed_ul');
 var userPoints = 0; // this will be part of the constructor.
-
-
 
 
 // chore constructor
@@ -105,35 +104,39 @@ function handleToDoCompleted(event) {
   // thing 1, take it out
   // thing 2, get the chore (name) and the choreArray.chore, grab the points assoiacted with that. Send that to a points global variable.
   evId = event.target.id;
+  console.log(evId);
   for (var i = 0; i < addedChores.item.length; i++) {
     // console.log(event.target.id);
-    if (event.target.id == item[i].id) {
-      //console.log(`item instance chore name is, ${addedChores.item[i].chores}`);
+    if (evId === item[i].id[0]) {
+      console.log(`item instance chore name is, ${addedChores.item[i].id[0]}`);
       // console.log(i);
       break;
     }
   }
   for (var j = 0; j < choreArray.length; j++) {
-    if (addedChores.item[i].chores === choreArray[j].chore) {
-      // console.log(`item instance chore name is, ${addedChores.item[i].chores} choreArray is at ${choreArray[j].chore}`);
+    if (item[i].chores === choreArray[j].chore) {
+      console.log(`item instance chore name is, ${addedChores.item[i].chores} choreArray is at ${choreArray[j].chore}`);
       moveToCompleted();
       userPoints += choreArray[j].points;
-      // console.log(`user points currently at ${userPoints}`);
+      var toBeRemoved = document.getElementById(evId);
+      toBeRemoved.innerHTML = '';
+      console.log(`user points currently at ${userPoints}`);
       break;
     }
   }
 }
 
-var use;
+var use; // this will contain the chore and day content.
 function moveToCompleted () {
   for (var i = 0; i < item.length; i++) {
-    if (item[i].id == evId) {
+    if (item[i].id[0] === evId) {
       use = item[i].content;
     }
   }
   var li = document.createElement('li');
-  li.textContent = use;
+  li.textContent = `${use} has been completed!`;
   completedUl.append(li);
+
 }
 
 //event listener for filling the to-do list
