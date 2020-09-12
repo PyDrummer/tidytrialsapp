@@ -1,6 +1,12 @@
 /* cleaning icons made by - https://www.flaticon.com/authors/ddara */
 
-/* Speed racer color codes */
+/* WORK NOTES: */
+
+/* 1. CHARTREUSE USED FOR TARGETING AND TESTING */
+
+/* ................................................................ */
+
+/* COLOR PALETTE */
 
 /* #4374C5 Blue */
 /* #F2B441 Yellow */
@@ -9,35 +15,47 @@
 /* #F22222 Red */
 /* #EBE8E3 White */
 
+/* ................................................................ */
+/* WHOLE DOCUMENT OR WHATEVER */
+/* ................................................................ */
 
 html{
   background-color: #EBE8E3;
-
 }
-/* Nav Bar All Pages */
+body {
+  width: 1000px;
+  margin-top:10px ;
+  margin: auto;  
+}
+/* ................................................................ */
+/* NAVIGATION BAR ALL PAGES */
+/* ................................................................ */
+
+
 h1{
-  font-family: 'Faster One', cursive;
+  /* Main Logo Header */
+  
   color: #F2B441;
   font-size: 90px;
-  text-align: center;
   background-color: #4374C5;
-  width: 1000px;
+  font-family: 'Faster One', cursive;
+  text-align: center;
   text-shadow: 2px 2px 2px black;
   box-shadow: 2px 3px 2px black;
+  width: 1000px;
 }
 h2{ 
-  /* About Us name font - Look for cool font later */
-  float: right;
-  font-size: 55px;
-  padding: 20px;
-  font-family: 'Racing Sans One', cursive;
+  /* About Us header- Look for cool font later */
+  
   color: #F22222;
+  font-size: 55px;
+  font-family: 'Racing Sans One', cursive;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color:#F2B441;
   text-shadow: 2px 2px 2px black;
-}
-h3{
-  text-align: center;
+  float: right;
+  padding: 20px;
+
 }
 nav {
   /* includes links to custom, about, and home pages */
@@ -58,18 +76,60 @@ nav a{
   padding: 10px;
   color: #F2B441;
 }
+/* ................................................................ */
+/* INDEX/HOME*/
+/* ................................................................ */
 
-/* About Us 4 Section */
 
-body{
-  /* body container */
-  width: 1000px;
-  margin-top:10px ;
-  margin: auto;
+form{
+  /* login and create */
+
+  font-family: 'Racing Sans One';
+  float: right;
+  height: 20px;
+  background-color: #4374C5;
+  color: #EBE8E3;
+  border-style: dashed;
+  border-width: 2px ;
+  border-color: #F2B441;
+  padding: 1px;
+  text-align: center;
+  margin-top: 8px;
+  text-shadow: 1px 1px 1px black;
+
+}
+
+/* ................................................................ */
+/* Progress bars/race track?....in progress*/
+
+#progressBars{
+  /* background-color: chartreuse; */
+  text-align: center;
+}
+#progressBars > label{
+  font-family: 'Racing Sans One';
+  /* background-color: chartreuse; */
+  width: 100px;
+}
+progress{
+  height: 40px;
+  width: 800px;
+  background-color: chartreuse;
+  padding: 2px;
   
 }
+
+/* Currently can't find a way to change the colors of the progress bars - when removing background color the whole bar vanishes - going to address later if it aligns with functionality of JS Sept 10 */
+
+
+/* ................................................................ */
+/* ABOUT US SECTION*/
+/* ................................................................ */
+
+
 body section{ 
-  /* includes all 4 bios - text - img */
+  /* Targets the 4 bios,text, and img elements */
+
   background-color: #F29A2E;
   width: 490px;
   float: left;
@@ -79,47 +139,31 @@ body section{
 
 }
 body section img{
+  /* targets images only */
+
   width: 100px;
   box-shadow: 2px 2px 2px black;
 }
 
-/* hover elements */
+a{
+  text-shadow: 1px 1px 1px black;
+}
 a:hover {
   /* all tags on nav bar */
+
   font-style: italic;
   font-family: 'Faster One', cursive;
-  text-shadow: 2px 2px 2px black;
+  text-shadow: -8px 2px 2px black;
   -webkit-transform: scale(1.3);
   -ms-transform: scale(1.3);
   transform: scale(1.3);
 }
 .bio:hover{
   -webkit-transform: scale(1.3);
-    -ms-transform: scale(1.3);
-    transform: scale(1.3);
+  -ms-transform: scale(1.3);
+  transform: scale(1.3);
   background-color: chartreuse;
 }
-
-/* HOME PAGE FOCUSED */
-form{
-  /* login and create */
-  float: right;
-  height: 20px;
-  background-color: #4374C5;
-  color: #F2B441;
-  border-style: ridge;
-  border-width: 3px ;
-  padding: 0px;
-  text-align: center;
-
-  margin-top: 8px;
-  /* width: 100px; */
-}
-
-#race{
-  /* progress bar */
-  background-color: chartreuse;
-  width: 900px;
-  height: 40px;
-  margin: auto;
-}
+/* ................................................................ */
+/* ................................................................ */
+/* ................................................................ */

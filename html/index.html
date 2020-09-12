@@ -16,7 +16,7 @@
   <h1>Tidy Trials</h1>
   <nav>
     <ul>
-      <li><a href="/index.html">Home</a></li>
+      <li><a href="../html/index.html">Home</a></li>
       <li><a href="../html/aboutus.html">About Us</a></li>
       <li><a href="../html/customize.html">Custom Page</a></li>
     </ul>
@@ -24,10 +24,23 @@
   </nav>
 </header>
 <body>
-  <div>
-    <label for="file">Total Points:</label>
-    <progress id="race" max="100" value="70"> 70% </progress>
+  <!-- Place Holder for further functionality - CSS uses id=progressBars and label/progress tags for styling  -->
+  <div id="progressBars">
+    <label for="file">Current Chore Standings:</label>
+    <br>
+      <label for="demo1">Player 1</label>
+      <progress id="demo1" max="100" value="70"> </progress>
+    <br>
+      <label for="demo1">Player 2</label>
+      <progress id="demo2" max="100" value="50"> player2 </progress>
+    <br>
+      <label for="demo1">Player 3</label>  
+      <progress id="demo3" max="100" value="45"> player3 </progress>
+    <br>
+      <label for="demo1">Player 4</label>  
+      <progress id="demo4" max="100" value="10"> player4 </progress>
   </div>
+  <!-- End of place holder structure - Please note order is intended to keep player names to the left of the bars. <br> tags help with that but its chill to change them if needed.-->
   <section>
     <form id="chores_form">
       <fieldset>
@@ -43,7 +56,7 @@
     <ul id="todo"></ul>
   </section>
   <section>
-    <ul>
+    <ul id="completed_ul">
       <li></li>
     </ul>
   </section>
