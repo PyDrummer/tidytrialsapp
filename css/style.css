@@ -80,7 +80,6 @@ nav a{
 /* INDEX/HOME*/
 /* ................................................................ */
 
-
 form{
   /* login and create */
 
@@ -94,14 +93,16 @@ form{
   border-color: #F2B441;
   padding: 1px;
   text-align: center;
-  margin-top: 8px;
+  /* margin-top: 8px; */
   text-shadow: 1px 1px 1px black;
-
+  /* text-align: center; */
 }
+
+
 
 /* ................................................................ */
 /* Progress bars/race track?....in progress*/
-
+/* ................................................................ */
 #progressBars{
   /* background-color: chartreuse; */
   text-align: center;
@@ -113,14 +114,13 @@ form{
 }
 progress{
   height: 40px;
-  width: 800px;
+  width: 936px;
   background-color: chartreuse;
   padding: 2px;
   
 }
 
 /* Currently can't find a way to change the colors of the progress bars - when removing background color the whole bar vanishes - going to address later if it aligns with functionality of JS Sept 10 */
-
 
 /* ................................................................ */
 /* ABOUT US SECTION*/
@@ -167,3 +167,28 @@ a:hover {
 /* ................................................................ */
 /* ................................................................ */
 /* ................................................................ */
+
+.indexToDo{
+  background-color: chartreuse;
+  text-align: center;
+  height: 200px;
+}
+.indexToDo form{
+  height: 20px;
+  background-color: #F29A2E
+}
+#completed_ul{
+  height: 215px;
+  background-color: crimson;
+  overflow: scroll;
+  overflow-x: hidden;
+  text-align: center;
+}
+
+#section_todo{
+  height: 200px;
+  background-color: cyan;
+
+  overflow: scroll;
+  overflow-x: hidden;
+}
