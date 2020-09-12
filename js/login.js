@@ -1,8 +1,10 @@
 'use strict';
 
-
+var usersNameArray = ['dasad'];
 var usersArray = [];
 var loginForm = document.getElementById('loginForm');
+var registerUserForm = document.getElementById('registerUserForm');
+
 //var myFormNewUser = document.getElementById('newUserForm');
 
 
@@ -18,49 +20,56 @@ if (retrieveUser) {
   usersArray = JSON.parse(retrieveUser);
 }
 
+var retrieveUserName = localStorage.getItem('usersName');
+if (retrieveUserName) {
+  usersNameArray = JSON.parse(retrieveUserName);
+}
+
+
 function login(event) {
   event.preventDefault();
   var loginUser = event.target.username.value;
-  console.log(loginUser);
-  //usersArray = JSON.parse(retrieveUser);
-  for (var i = 0; i < usersArray.length; i++) {
-    console.log(usersArray);
-    while (usersArray[i].name.includes(loginUser)) {
-      alert(`${loginUser} Welcome Back!!!.`);
+  //console.log('log1', loginUser);
+  for (var i = 0; i < usersNameArray.length; i++) {
+    //console.log('log2', usersNameArray);
+    if (usersNameArray.includes(loginUser)) {
+      //console.log('log3',usersNameArray.includes(loginUser));
+      alert(`Welcome Back ${loginUser}`);
+      break;
+    } else {
+      alert('Not a Valid Username');
       break;
     }
-    new Users(loginUser);
-    var stringUsers = JSON.stringify(usersArray);
-    localStorage.setItem('users', stringUsers);
-    alert(`${loginUser} welcome to Tidy Trials`);
-    break;
-
-    // if (loginUser === usersArray[i].name) {
-    //   alert(`${loginUser} Welcome Back!!!.`);
-    //   console.log(loginUser + ' is logged in');
-    // }
-    // if (loginUser !== usersArray[i].name) {
-    //   console.log(loginUser, usersArray[i].name);
-    //   new Users(loginUser);
-    //   var stringUsers = JSON.stringify(usersArray);
-    //   localStorage.setItem('users', stringUsers);
-    //   alert(`${loginUser} welcome to Tidy Trials`);
-    //   break;
-    // }
   }
+  loginForm.reset();
 }
-//new Users('xyz');
 
 
-/*function registerUser(event){
+function registerUser(event) {
   event.preventDefault();
-  var createUser = event.target.username.value;
-  usersArray.push(createUser);
-  console.log(usersArray);
-  var stringUsers = JSON.stringify(usersArray);
-  localStorage.setItem('users', stringUsers);
-}*/
+  var loginUser = event.target.username.value;
+  for (var i = 0; i < usersArray.length; i++) {
+    if (loginUser !== usersArray[i].name) {
+      alert('Welcome to Tidy Trials');
+      new Users(loginUser);
+      usersNameArray.push(loginUser);
+      break;
+    }
+  }
+  console.log(usersNameArray);
+  registerUserForm.reset();
+  var stringUsersArray = JSON.stringify(usersArray);
+  localStorage.setItem('users', stringUsersArray);
+  var stringUsersNameArray = JSON.stringify(usersNameArray);
+  localStorage.setItem('usersName', stringUsersNameArray);
+}
+
+
+new Users('xyz');
+
+
+
 
 
 loginForm.addEventListener('submit', login);
-//myFormNewUser.addEventListener('submit', registerUser);
+registerUserForm.addEventListener('submit', registerUser);
