@@ -9,7 +9,8 @@ var sectionTodo = document.getElementById('section_todo');
 var ul = document.getElementById('todo');
 var completedUl = document.getElementById('completed_ul');
 var userPoints = 0; // this will be part of the constructor.
-
+var parsedAddedChoresItem = JSON.parse(localStorage.getItem('allAddedChoresItem'));
+// need to save parsedAddedChoresItems
 
 // chore constructor
 var Chores = function (chore, points) {
@@ -47,12 +48,11 @@ fillDropDown();
 // -------------------------------------------------------------------------------------------------------------------
 // All these constructors have to be below the stuff above for it to work
 
-// constructor to add the day option to the chores
-var AddDayToChores = function (chores, day) {
+var AddDayToChores = function (chores, day, content, id) {
   this.chores = chores;
   this.day = day;
-  this.content = [];
-  this.id = [];
+  this.content = content;
+  this.id = id;
 };
 
 // item is a blank array.
@@ -60,45 +60,64 @@ var ChoreAndDay = function (item) {
   this.item = item;
 };
 
-ChoreAndDay.prototype.addItem = function (chores, day) {
-  var newChoreAndDay = new AddDayToChores(chores, day);
+ChoreAndDay.prototype.addItem = function (chores, day, content, id) {
+  var newChoreAndDay = new AddDayToChores(chores, day, content, id);
   this.item.push(newChoreAndDay);
 };
 
 // ---- All the constructors above need to work before addedChores works. ------
 // chore and day object stored in addedChores
 var addedChores = new ChoreAndDay([]);
+if (parsedAddedChoresItem) {
+  for (var i = 0; i < parsedAddedChoresItem.length; i++){
+    addedChores.addItem(parsedAddedChoresItem[i].chores, parsedAddedChoresItem[i].day, parsedAddedChoresItem[i].content, parsedAddedChoresItem[i].id);
+  }
+  console.log(addedChores);
+}
 
 function fillToDo(event) {
   event.preventDefault();
   var choreName = event.target.chores_index.value;
-  //console.log(choreName);
+  //console.log('chorename ' + choreName);
   var daySelection = event.target.day_index.value;
-  //console.log(daySelection);
-  addedChores.addItem(choreName, daySelection);
-  //console.log(addedChores); this works
+  //console.log('dayselection ' + daySelection);
+  for (var i = 0; i < addedChores.item.length; i++);
+  var idName = choreName + i;
+  //console.log('id name ' + idName);
+  var content = `${choreName} should be done ${daySelection}`;
+  //console.log(content + 'Content');
+  addedChores.addItem(choreName, daySelection, content, idName);
+  //console.log('addedchores array ' + addedChores.item[0].chores); //this works
   postToDoList();
 }
 //-----------------------------------------------
 
+// add another render method for the stuff in local storage.
+// seperate local storage array, add the new items to that.
 
-var liRef = 0;
-var item = addedChores.item;
-var idName;
+function renderLocalStorageArray() {
+  for (var i = 0; i < addedChores.item.length; i++) {
+    var liEl = document.createElement('li');
+    liEl.setAttribute('id', addedChores.item[i].id);
+    liEl.textContent = `${addedChores.item[i].chores} should be done ${addedChores.item[i].day}`;
+    ul.append(liEl);
+  }
+}
+renderLocalStorageArray();
+
 function postToDoList() {
   var li = document.createElement('li');
-  for (var i = 0; i < item.length; i++) {
-    idName = item[i].chores + i;
-  }
-  li.setAttribute('id', idName);
-  li.textContent = `${item[liRef].chores} should be done ${item[liRef].day}`;
-  item[liRef].content.push(`${item[liRef].chores} should be done ${item[liRef].day}`);
-  item[liRef].id.push(idName);
+  var i = addedChores.item.length -1;
+  li.setAttribute('id', addedChores.item[i].id);
+  li.textContent = `${addedChores.item[i].chores} should be done ${addedChores.item[i].day}`;
   ul.append(li);
-  liRef++;
+  //local storage
+  var addedChoresItemStringified = JSON.stringify(addedChores.item); // updating the local storage.
+  localStorage.setItem('allAddedChoresItem', addedChoresItemStringified);
 }
 
-//----------------------------- We left off here 9.9.2020
+
+//-----------------------------
 var evId;
 function handleToDoCompleted(event) {
   // thing 1, take it out
@@ -107,14 +126,15 @@ function handleToDoCompleted(event) {
   console.log(evId);
   for (var i = 0; i < addedChores.item.length; i++) {
     // console.log(event.target.id);
-    if (evId === item[i].id[0]) {
+    if (evId === addedChores.item[i].id) {
       console.log(`item instance chore name is, ${addedChores.item[i].id[0]}`);
       // console.log(i);
       break;
     }
   }
   for (var j = 0; j < choreArray.length; j++) {
-    if (item[i].chores === choreArray[j].chore) {
+    console.log(addedChores.item[i].chores);
+    if (addedChores.item[i].chores === choreArray[j].chore) {
       console.log(`item instance chore name is, ${addedChores.item[i].chores} choreArray is at ${choreArray[j].chore}`);
       moveToCompleted();
       userPoints += choreArray[j].points;
@@ -127,16 +147,15 @@ function handleToDoCompleted(event) {
 }
 
 var use; // this will contain the chore and day content.
-function moveToCompleted () {
-  for (var i = 0; i < item.length; i++) {
-    if (item[i].id[0] === evId) {
-      use = item[i].content;
+function moveToCompleted() {
+  for (var i = 0; i < addedChores.item.length; i++) {
+    if (addedChores.item[i].id === evId) {
+      use = addedChores.item[i].content;
     }
   }
   var li = document.createElement('li');
   li.textContent = `${use} has been completed!`;
   completedUl.append(li);
-
 }
 
 //event listener for filling the to-do list
