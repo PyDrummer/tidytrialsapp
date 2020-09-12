@@ -22,7 +22,7 @@ function login(event) {
   event.preventDefault();
   var loginUser = event.target.username.value;
   console.log(loginUser);
-  usersArray = JSON.parse(retrieveUser);
+  //usersArray = JSON.parse(retrieveUser);
   for (var i = 0; i < usersArray.length; i++) {
     console.log(usersArray);
     while (usersArray[i].name.includes(loginUser)) {
@@ -47,8 +47,6 @@ function login(event) {
     //   alert(`${loginUser} welcome to Tidy Trials`);
     //   break;
     // }
-
-
   }
 }
 //new Users('xyz');
