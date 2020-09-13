@@ -35,6 +35,7 @@ function login(event) {
     if (usersNameArray.includes(loginUser)) {
       //console.log('log3',usersNameArray.includes(loginUser));
       alert(`Welcome Back ${loginUser}`);
+      window.location.replace('http://127.0.0.1:5501/html/index.html');
       break;
     } else {
       alert('Not a Valid Username');
