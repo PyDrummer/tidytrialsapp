@@ -2,7 +2,11 @@
 
 /* WORK NOTES: */
 
-/* 1. CHARTREUSE USED FOR TARGETING AND TESTING */
+/* TEST/TARGET COLORS:
+Chartreuse
+Crimson
+Cyan
+ */
 
 /* ................................................................ */
 
@@ -15,6 +19,8 @@
 /* #F22222 Red */
 /* #EBE8E3 White */
 
+
+
 /* ................................................................ */
 /* WHOLE DOCUMENT OR WHATEVER */
 /* ................................................................ */
@@ -25,12 +31,15 @@ html{
 body {
   width: 1000px;
   margin-top:10px ;
-  margin: auto;  
+  margin: auto;
+  font-family: 'Racing Sans One';  
 }
+
+
 /* ................................................................ */
 /* NAVIGATION BAR ALL PAGES */
+/*  Good for now - Sept 12
 /* ................................................................ */
-
 
 h1{
   /* Main Logo Header */
@@ -76,8 +85,12 @@ nav a{
   padding: 10px;
   color: #F2B441;
 }
+
+
 /* ................................................................ */
 /* INDEX/HOME*/
+/*  Good for now - Sept 12
+/*  Add Button staying mayhaps
 /* ................................................................ */
 
 form{
@@ -93,39 +106,90 @@ form{
   border-color: #F2B441;
   padding: 1px;
   text-align: center;
-  /* margin-top: 8px; */
   text-shadow: 1px 1px 1px black;
-  /* text-align: center; */
+}
+.indexToDo{
+  /* Form Container below progress bars */
+
+  background-color: #F29A2E;
+  height: 25px;
+  width: 1000px;
+  text-align: right;
+  margin: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  
+}
+.indexToDo form{
+  /* Targets form on Index for new chores - previous selector ``form`` also responsible for some formatting */
+
+  height: 20px;
+  background-color: #F29A2E;
+  float: left;
+  width: 490px;
+}
+#completed_ul{
+  /* Chores that have been clicked/completed appear here */
+
+  height: 200px;
+  background-color: #EBE8E3;
+  overflow: scroll;
+  overflow-x: hidden;
+  text-align: center;
+  padding: 2px;
+  margin: 3px;
+  box-shadow: inset 2px 2px 2px black;
+  /* font-family: 'Racing Sans One'; */
+}
+#section_todo{
+  height: 200px;
+  background-color:#EBE8E3;
+  overflow: scroll;
+  overflow-x: hidden;
+  text-align: center;
+  width: 480px;
+  box-shadow: inset 2px 2px 2px black;
+  
+}
+#completed_ul:hover{
+  /* background-color: chartreuse; */
+  cursor: pointer;
+}
+#section_todo:hover{
+  background-color: chartreuse;
+  cursor: pointer;
+  
 }
 
 
 
 /* ................................................................ */
 /* Progress bars/race track?....in progress*/
+/* Needs to have progress bar functionality added to parameters of progress tag - pipe in number value w/ DOM
 /* ................................................................ */
-#progressBars{
-  /* background-color: chartreuse; */
-  text-align: center;
-}
+
 #progressBars > label{
   font-family: 'Racing Sans One';
-  /* background-color: chartreuse; */
   width: 100px;
 }
 progress{
+  /* IN PROGRESS - ON HOLD SEPT 12*/
   height: 40px;
   width: 936px;
   background-color: chartreuse;
   padding: 2px;
+  /* box-sizing: border-box; */
+  /* float: left; */
   
+  /* Currently can't find a way to change the colors of the progress bars - when removing background color the whole bar vanishes - going to address later if it aligns with functionality of JS Sept 10 */
 }
+ 
 
-/* Currently can't find a way to change the colors of the progress bars - when removing background color the whole bar vanishes - going to address later if it aligns with functionality of JS Sept 10 */
 
 /* ................................................................ */
 /* ABOUT US SECTION*/
+/* Saved room to change each color of each box so we can customize our float color - also room to add stats like a baseball card/old vidyagame.
 /* ................................................................ */
-
 
 body section{ 
   /* Targets the 4 bios,text, and img elements */
@@ -144,7 +208,6 @@ body section img{
   width: 100px;
   box-shadow: 2px 2px 2px black;
 }
-
 a{
   text-shadow: 1px 1px 1px black;
 }
@@ -159,36 +222,34 @@ a:hover {
   transform: scale(1.3);
 }
 .bio:hover{
-  -webkit-transform: scale(1.3);
-  -ms-transform: scale(1.3);
-  transform: scale(1.3);
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
   background-color: chartreuse;
 }
-/* ................................................................ */
-/* ................................................................ */
-/* ................................................................ */
 
-.indexToDo{
+/* ................................................................ */
+/* Landing Page */
+/* Going to add more style to landing page, needs to be linked to rest of code base. Also going to add animations to landing page.
+/* ................................................................ */
+#registerUserForm{
   background-color: chartreuse;
-  text-align: center;
-  height: 200px;
+  /* margin: 3px; */
+  padding: 2px;
+  float: left;
+  margin-left: 3px;
 }
-.indexToDo form{
-  height: 20px;
-  background-color: #F29A2E
-}
-#completed_ul{
-  height: 215px;
+#loginForm{
   background-color: crimson;
-  overflow: scroll;
-  overflow-x: hidden;
-  text-align: center;
+  margin-right: 3px;
 }
-
-#section_todo{
-  height: 200px;
-  background-color: cyan;
-
-  overflow: scroll;
-  overflow-x: hidden;
+.landingForm{
+  margin: 0px;
+  background-color: #4374C5;
+  height: 30px;
+  text-shadow: 1px 1px 1px black;
+  box-shadow: 2px 2px 2px black;
 }
+/* ................................................................ */
+/* ................................................................ */
+/* ................................................................ */
