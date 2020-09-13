@@ -1,16 +1,38 @@
 'use strict';
 
 var choreArray = [];
+var removedArray = [];
 var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 var choreList = document.getElementById('chores_index');
 var dayList = document.getElementById('day_index');
 var choresForm = document.getElementById('chores_form');
 var sectionTodo = document.getElementById('section_todo');
 var ul = document.getElementById('todo');
+var removedUl = document.getElementById('completed_ul');
 var completedUl = document.getElementById('completed_ul');
 var userPoints = 0; // this will be part of the constructor.
 var parsedAddedChoresItem = JSON.parse(localStorage.getItem('allAddedChoresItem'));
-// need to save parsedAddedChoresItems
+var parsedLoopingInt = JSON.parse(localStorage.getItem('currentLoopingInt'));
+var gotRemovedArrayItem = localStorage.getItem('removedArrayItem');
+var parsedRemovedArrayItem = JSON.parse(gotRemovedArrayItem);
+
+// trying to get local storage not to save over
+// var gotSavedRAs = localStorage.getItem('savedAllRAs');
+// var parsedSavedRAs = JSON.parse(gotSavedRAs);
+
+// if (parsedSavedRAs) {
+//   allRemovedArrays = parsedSavedRAs;
+// }
+// var allRemovedArrays = [{chores: 'sweep', day: 'unday', content: 'sweep should be done Sunday', id: 'DontOverwrite'}];
+
+// if (parsedRemovedArrayItem) {
+//   for(var i = 0; i < parsedRemovedArrayItem.length; i++){
+//     allRemovedArrays.push(parsedRemovedArrayItem[i]);
+//   }
+// }
+
+// var savedAllRA = JSON.stringify(allRemovedArrays);
+// localStorage.setItem('savedAllRAs', savedAllRA);
 
 // chore constructor
 var Chores = function (chore, points) {
@@ -68,11 +90,28 @@ ChoreAndDay.prototype.addItem = function (chores, day, content, id) {
 // ---- All the constructors above need to work before addedChores works. ------
 // chore and day object stored in addedChores
 var addedChores = new ChoreAndDay([]);
+var removedChores = new ChoreAndDay([]);
+
+// instanciating previously stored added chores
 if (parsedAddedChoresItem) {
-  for (var i = 0; i < parsedAddedChoresItem.length; i++){
-    addedChores.addItem(parsedAddedChoresItem[i].chores, parsedAddedChoresItem[i].day, parsedAddedChoresItem[i].content, parsedAddedChoresItem[i].id);
+  for (var j = 0; j < parsedAddedChoresItem.length; j++) {
+    addedChores.addItem(parsedAddedChoresItem[j].chores, parsedAddedChoresItem[j].day, parsedAddedChoresItem[j].content, parsedAddedChoresItem[j].id);
   }
   console.log(addedChores);
+}
+
+//instanciating previously removed chores
+if (parsedRemovedArrayItem) {
+  for (var int = 0; int < parsedRemovedArrayItem.length; int++) {
+    removedChores.addItem(parsedRemovedArrayItem[int].chores, parsedRemovedArrayItem[int].day, parsedRemovedArrayItem[int].content, parsedRemovedArrayItem[int].id);
+  }
+  console.log(removedChores);
+}
+
+// infinite looper!
+var loopingInt = 1;
+if (parsedLoopingInt) {
+  loopingInt = parsedLoopingInt;
 }
 
 function fillToDo(event) {
@@ -81,8 +120,13 @@ function fillToDo(event) {
   //console.log('chorename ' + choreName);
   var daySelection = event.target.day_index.value;
   //console.log('dayselection ' + daySelection);
-  for (var i = 0; i < addedChores.item.length; i++);
-  var idName = choreName + i;
+  for (var i = 0; i < loopingInt + 1; i++) {
+    var idName = choreName + loopingInt;
+    loopingInt++;
+    var loopingIntStringed = JSON.stringify(loopingInt); // updating the local storage.
+    localStorage.setItem('currentLoopingInt', loopingIntStringed);
+    break;
+  }
   //console.log('id name ' + idName);
   var content = `${choreName} should be done ${daySelection}`;
   //console.log(content + 'Content');
@@ -95,7 +139,8 @@ function fillToDo(event) {
 // add another render method for the stuff in local storage.
 // seperate local storage array, add the new items to that.
 
-function renderLocalStorageArray() {
+//render addedChores array
+function renderAddedChoresArray() {
   for (var i = 0; i < addedChores.item.length; i++) {
     var liEl = document.createElement('li');
     liEl.setAttribute('id', addedChores.item[i].id);
@@ -103,11 +148,22 @@ function renderLocalStorageArray() {
     ul.append(liEl);
   }
 }
-renderLocalStorageArray();
+renderAddedChoresArray();
+
+//render removedChores array
+function renderRemovedArray() {
+  for (var j = 0; j < removedChores.item.length; j++) {
+    var liElTwo = document.createElement('li');
+    liElTwo.setAttribute('id', removedChores.item[j].id);
+    liElTwo.textContent = `${removedChores.item[j].chores} should be done ${removedChores.item[j].day} has been completed!`;
+    removedUl.append(liElTwo);
+  }
+}
+renderRemovedArray();
 
 function postToDoList() {
   var li = document.createElement('li');
-  var i = addedChores.item.length -1;
+  var i = addedChores.item.length - 1;
   li.setAttribute('id', addedChores.item[i].id);
   li.textContent = `${addedChores.item[i].chores} should be done ${addedChores.item[i].day}`;
   ul.append(li);
@@ -125,22 +181,44 @@ function handleToDoCompleted(event) {
   evId = event.target.id;
   console.log(evId);
   for (var i = 0; i < addedChores.item.length; i++) {
-    // console.log(event.target.id);
+    //console.log(event.target.id);
     if (evId === addedChores.item[i].id) {
-      console.log(`item instance chore name is, ${addedChores.item[i].id[0]}`);
+      //console.log(`item instance chore name is, ${addedChores.item[i].id}`);
       // console.log(i);
       break;
     }
   }
   for (var j = 0; j < choreArray.length; j++) {
-    console.log(addedChores.item[i].chores);
+    //console.log(addedChores.item[i].chores);
     if (addedChores.item[i].chores === choreArray[j].chore) {
       console.log(`item instance chore name is, ${addedChores.item[i].chores} choreArray is at ${choreArray[j].chore}`);
-      moveToCompleted();
       userPoints += choreArray[j].points; // maybe turn this into calling a fnction there?
+
+      //removedIdName = 'removed' + j; // sends this to moveToCompleted()
+      //evId.setAttribute('id', removedIdName);///////
+
       var toBeRemoved = document.getElementById(evId);
       toBeRemoved.innerHTML = '';
+      console.log('i is ' + i);
+
+      moveToCompleted();
+
+      // removedArray.push(parsedRemovedArrayItem);
+      removedArray.push(addedChores.item[i]); // this works
+      //allRemovedArrays.push(addedChores.item[i]);
+      console.log('removed array contennts' + removedArray);
+      var removedArrayString = JSON.stringify(removedArray);
+      localStorage.setItem('removedArrayItem', removedArrayString);
       console.log(`user points currently at ${userPoints}`);
+
+      addedChores.item.splice([i], 1);
+      //console.log('item that was removed' + removedArray); WORKS
+      //console.log('current added chores array ', addedChores); WORKS
+
+      // updating the local storage.
+      var addedChoresItemStringified = JSON.stringify(addedChores.item);
+      localStorage.setItem('allAddedChoresItem', addedChoresItemStringified);
+
       break;
     }
   }
