@@ -2,7 +2,11 @@
 
 /* WORK NOTES: */
 
-/* 1. CHARTREUSE USED FOR TARGETING AND TESTING */
+/* TEST/TARGET COLORS:
+Chartreuse
+Crimson
+Cyan
+ */
 
 /* ................................................................ */
 
@@ -14,6 +18,8 @@
 /* #D95829 Orange */
 /* #F22222 Red */
 /* #EBE8E3 White */
+
+
 
 /* ................................................................ */
 /* WHOLE DOCUMENT OR WHATEVER */
@@ -30,12 +36,9 @@ body {
 }
 
 
-
-
-
-
 /* ................................................................ */
 /* NAVIGATION BAR ALL PAGES */
+/*  Good for now - Sept 12
 /* ................................................................ */
 
 h1{
@@ -84,13 +87,10 @@ nav a{
 }
 
 
-
-
-
-
-
 /* ................................................................ */
 /* INDEX/HOME*/
+/*  Good for now - Sept 12
+/*  Add Button staying mayhaps
 /* ................................................................ */
 
 form{
@@ -141,7 +141,6 @@ form{
   box-shadow: inset 2px 2px 2px black;
   /* font-family: 'Racing Sans One'; */
 }
-
 #section_todo{
   height: 200px;
   background-color:#EBE8E3;
@@ -162,8 +161,11 @@ form{
   
 }
 
+
+
 /* ................................................................ */
 /* Progress bars/race track?....in progress*/
+/* Needs to have progress bar functionality added to parameters of progress tag - pipe in number value w/ DOM
 /* ................................................................ */
 
 #progressBars > label{
@@ -184,14 +186,10 @@ progress{
  
 
 
-
-
-
-
 /* ................................................................ */
 /* ABOUT US SECTION*/
+/* Saved room to change each color of each box so we can customize our float color - also room to add stats like a baseball card/old vidyagame.
 /* ................................................................ */
-
 
 body section{ 
   /* Targets the 4 bios,text, and img elements */
@@ -210,7 +208,6 @@ body section img{
   width: 100px;
   box-shadow: 2px 2px 2px black;
 }
-
 a{
   text-shadow: 1px 1px 1px black;
 }
@@ -225,10 +222,33 @@ a:hover {
   transform: scale(1.3);
 }
 .bio:hover{
-  -webkit-transform: scale(1.3);
-  -ms-transform: scale(1.3);
-  transform: scale(1.3);
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
   background-color: chartreuse;
+}
+
+/* ................................................................ */
+/* Landing Page */
+/* Going to add more style to landing page, needs to be linked to rest of code base. Also going to add animations to landing page.
+/* ................................................................ */
+#registerUserForm{
+  background-color: chartreuse;
+  /* margin: 3px; */
+  padding: 2px;
+  float: left;
+  margin-left: 3px;
+}
+#loginForm{
+  background-color: crimson;
+  margin-right: 3px;
+}
+.landingForm{
+  margin: 0px;
+  background-color: #4374C5;
+  height: 30px;
+  text-shadow: 1px 1px 1px black;
+  box-shadow: 2px 2px 2px black;
 }
 /* ................................................................ */
 /* ................................................................ */
