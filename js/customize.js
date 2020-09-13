@@ -5,11 +5,21 @@ var pointValue = document.getElementById('valueIndex');
 var choreArrStr;
 var userCreatesChore = document.getElementById('userChoreCreator');
 var createPointAssignment = document.getElementById('pointValue');
+var displayUl = document.getElementById('choreDisplay');
+var li;
+var check = 0;
+var gotChoreArray = localStorage.getItem('choreArrStored');
+var parsedChoreArray = JSON.parse(gotChoreArray);
+
+if (parsedChoreArray) {
+  choreArray = parsedChoreArray;
+}
 
 // update point value to whatever user puts in with event listener.
 var customizeDropDown = document.getElementById('updatePoints');
-function updatePointValue (event) {
+function updatePointValue(event) {
   event.preventDefault();
+  removeChoreDisplay();
   console.log('update');
   for (var i = 0; i < choreArray.length; i++) {
     if (event.target.chores.value === choreArray[i].chore) {
@@ -18,6 +28,7 @@ function updatePointValue (event) {
       break;
     }
   }
+  choreDisplay();
   storeChoreArr();
 }
 
@@ -37,7 +48,7 @@ function fillCustDropDown() {
 fillCustDropDown();
 
 // fills chore creator point value drop down
-function fillCreatorDropDown () {
+function fillCreatorDropDown() {
   for (var i = 0; i < 10; i++) {
     var option = document.createElement('option');
     option.textContent = i;
@@ -47,13 +58,16 @@ function fillCreatorDropDown () {
 fillCreatorDropDown();
 
 // allows user to create new chore and assign values
-function userChoreCreation (event) {
+function userChoreCreation(event) {
   event.preventDefault();
+  removeChoreDisplay();
   var choreName = event.target.choreName.value;
   var points = parseInt(event.target.pointValue.value);
   console.log('yes1');
   new Chores(choreName, points);
+  choreDisplay();
   storeChoreArr();
+  location.reload();
 }
 
 // sets choreArray to local storage
@@ -61,6 +75,24 @@ function storeChoreArr() {
   choreArrStr = JSON.stringify(choreArray);
   localStorage.setItem('choreArrStored', choreArrStr);
 }
+
+function choreDisplay() {
+  for (var i = 0; i < choreArray.length; i++) {
+    li = document.createElement('li');
+    li.setAttribute('id', 'chore' + i);
+    li.textContent = `${choreArray[i].chore} has a point value of ${choreArray[i].points}.`;
+    displayUl.append(li);
+  }
+}
+
+function removeChoreDisplay() {
+  for (var i = 0; i < choreArray.length; i++) {
+    var liItem = document.getElementById('chore' + i);
+    liItem.innerHTML = '';
+  }
+}
+
+choreDisplay();
 
 // listens for creation of chore
 userCreatesChore.addEventListener('submit', userChoreCreation);
