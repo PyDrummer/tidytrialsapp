@@ -16,24 +16,6 @@ var parsedLoopingInt = JSON.parse(localStorage.getItem('currentLoopingInt'));
 var gotRemovedArrayItem = localStorage.getItem('removedArrayItem');
 var parsedRemovedArrayItem = JSON.parse(gotRemovedArrayItem);
 
-// trying to get local storage not to save over
-// var gotSavedRAs = localStorage.getItem('savedAllRAs');
-// var parsedSavedRAs = JSON.parse(gotSavedRAs);
-
-// if (parsedSavedRAs) {
-//   allRemovedArrays = parsedSavedRAs;
-// }
-// var allRemovedArrays = [{chores: 'sweep', day: 'unday', content: 'sweep should be done Sunday', id: 'DontOverwrite'}];
-
-// if (parsedRemovedArrayItem) {
-//   for(var i = 0; i < parsedRemovedArrayItem.length; i++){
-//     allRemovedArrays.push(parsedRemovedArrayItem[i]);
-//   }
-// }
-
-// var savedAllRA = JSON.stringify(allRemovedArrays);
-// localStorage.setItem('savedAllRAs', savedAllRA);
-
 // chore constructor
 var Chores = function (chore, points) {
   this.chore = chore;
@@ -150,17 +132,6 @@ function renderAddedChoresArray() {
 }
 renderAddedChoresArray();
 
-//render removedChores array
-function renderRemovedArray() {
-  for (var j = 0; j < removedChores.item.length; j++) {
-    var liElTwo = document.createElement('li');
-    liElTwo.setAttribute('id', removedChores.item[j].id);
-    liElTwo.textContent = `${removedChores.item[j].chores} should be done ${removedChores.item[j].day} has been completed!`;
-    removedUl.append(liElTwo);
-  }
-}
-renderRemovedArray();
-
 function postToDoList() {
   var li = document.createElement('li');
   var i = addedChores.item.length - 1;
@@ -194,18 +165,17 @@ function handleToDoCompleted(event) {
       console.log(`item instance chore name is, ${addedChores.item[i].chores} choreArray is at ${choreArray[j].chore}`);
       userPoints += choreArray[j].points; // maybe turn this into calling a fnction there?
 
-      //removedIdName = 'removed' + j; // sends this to moveToCompleted()
-      //evId.setAttribute('id', removedIdName);///////
-
       var toBeRemoved = document.getElementById(evId);
       toBeRemoved.innerHTML = '';
       console.log('i is ' + i);
 
+      // This will move all the parsed stuff into removedArray before it gets over written.
+      if (parsedRemovedArrayItem) {
+        removedArray = parsedRemovedArrayItem;
+      }
       moveToCompleted();
 
-      // removedArray.push(parsedRemovedArrayItem);
       removedArray.push(addedChores.item[i]); // this works
-      //allRemovedArrays.push(addedChores.item[i]);
       console.log('removed array contennts' + removedArray);
       var removedArrayString = JSON.stringify(removedArray);
       localStorage.setItem('removedArrayItem', removedArrayString);
@@ -235,6 +205,18 @@ function moveToCompleted() {
   li.textContent = `${use} has been completed!`;
   completedUl.append(li);
 }
+
+//render removedChores array
+function renderRemovedArray() {
+  for (var j = 0; j < removedChores.item.length; j++) {
+    var liElTwo = document.createElement('li');
+    liElTwo.setAttribute('id', removedChores.item[j].id);
+    liElTwo.textContent = `${removedChores.item[j].chores} should be done ${removedChores.item[j].day} has been completed!`;
+    removedUl.append(liElTwo);
+  }
+}
+renderRemovedArray();
+
 
 //event listener for filling the to-do list
 choresForm.addEventListener('submit', fillToDo);
