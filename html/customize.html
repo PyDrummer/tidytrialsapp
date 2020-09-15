@@ -12,6 +12,7 @@
 </head>
 
 <body>
+
   <header>
     <h1>Tidy Trials</h1>
     <nav>
@@ -24,28 +25,33 @@
   </header>
 
 
-  <section>
+  
+
+  <section id="update_chores">
+
     <form id="updatePoints">
       <fieldset>
         <label>
+          <legend>This is where you can update the points of an existing chore!</legend>
           <span>Chore</span>
           <select id="chores"></select>
           <span>value</span>
           <select id="valueIndex"></select>
         </label>
-        <input type="submit" value="Add to list">
+        <input type="submit" value="Click To Update The Points">
       </fieldset>
     </form>
   </section>
-  <section>
+  <section id="chores_creator">
     <form id="userChoreCreator">
       <fieldset>
         <label for="">
+          <legend>This is where you can add a new chore!</legend>
           <span>Chore name</span>
           <input type="text" id="choreName">
           <span>Point Value</span>
           <select id="pointValue"></select>
-          <input type="submit">
+          <input type="Click To Add Your Chore">
         </label>
       </fieldset>
     </form>
