@@ -68,6 +68,7 @@ h2{
 }
 nav {
   /* includes links to custom, about, and home pages */
+
   height: 40px;
   background-color:#4374C5;
   margin: auto;
@@ -78,6 +79,7 @@ nav {
 }
 nav a{
   /* links in nav bar */
+
   float: left;
   text-align: center;
   text-decoration: none;
@@ -139,10 +141,9 @@ form{
   padding: 2px;
   margin: 3px;
   box-shadow: inset 2px 2px 2px black;
-  /* font-family: 'Racing Sans One'; */
 }
 #section_todo{
-  height: 200px;
+  height: 215px;
   background-color:#EBE8E3;
   overflow: scroll;
   overflow-x: hidden;
@@ -233,15 +234,15 @@ a:hover {
 /* Going to add more style to landing page, needs to be linked to rest of code base. Also going to add animations to landing page.
 /* ................................................................ */
 #registerUserForm{
-  background-color: chartreuse;
+  background-color: #4374C5;
   /* margin: 3px; */
   padding: 2px;
   float: left;
   margin-left: 3px;
 }
 #loginForm{
-  background-color: crimson;
-  margin-right: 3px;
+  background-color: #4374C5;
+  /* margin-right: 3px; */
 }
 .landingForm{
   margin: 0px;
@@ -249,6 +250,17 @@ a:hover {
   height: 30px;
   text-shadow: 1px 1px 1px black;
   box-shadow: 2px 2px 2px black;
+}
+
+#landingAnimation{
+  margin-top: 200px;
+  box-shadow: 15px 5px 50px 3px;
+  position: relative;
+  animation: landing 3s;
+}
+@keyframes landing {
+  0%   {top: 700px;}
+  100% {top: 0px;}
 }
 /* ................................................................ */
 /* ................................................................ */
