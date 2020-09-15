@@ -16,6 +16,9 @@ var parsedLoopingInt = JSON.parse(localStorage.getItem('currentLoopingInt'));
 var gotRemovedArrayItem = localStorage.getItem('removedArrayItem');
 var parsedRemovedArrayItem = JSON.parse(gotRemovedArrayItem);
 var resetButtonEl = document.getElementById('button');
+var gotChoreArray = localStorage.getItem('choreArrStored');
+var parsedChoreArray = JSON.parse(gotChoreArray);
+
 
 // chore constructor
 var Chores = function (chore, points) {
@@ -24,8 +27,10 @@ var Chores = function (chore, points) {
   choreArray.push(this);
 };
 
-// hard coded chores list with values.
-function createChoresObjects() {
+if (parsedChoreArray) {
+  choreArray = parsedChoreArray;
+} else {
+  // hard coded chores list with values.
   new Chores('sweep', 1);
   new Chores('mop', 2);
   new Chores('dishes', 5);
@@ -33,8 +38,8 @@ function createChoresObjects() {
   new Chores('laundry', 6);
   new Chores('mow lawn', 7);
   new Chores('collect leaves', 3);
+
 }
-createChoresObjects();
 
 // fills index.html dropdown menus
 function fillDropDown() {
