@@ -15,6 +15,7 @@ var parsedAddedChoresItem = JSON.parse(localStorage.getItem('allAddedChoresItem'
 var parsedLoopingInt = JSON.parse(localStorage.getItem('currentLoopingInt'));
 var gotRemovedArrayItem = localStorage.getItem('removedArrayItem');
 var parsedRemovedArrayItem = JSON.parse(gotRemovedArrayItem);
+var resetButtonEl = document.getElementById('button');
 
 // chore constructor
 var Chores = function (chore, points) {
@@ -217,6 +218,22 @@ function renderRemovedArray() {
 }
 renderRemovedArray();
 
+function createResetButton() {
+  resetButtonEl.textContent = 'Click to Reset';
+  resetButtonEl.addEventListener('click', resetHandler);
+}
+createResetButton();
+
+function resetHandler(e) {
+  console.log(e.target, resetButtonEl);
+  if (e.target === resetButtonEl) {
+    alert('You\'ve Reset All The Chores Data!');
+    localStorage.clear();
+    location.reload();
+  } else {
+    alert('It didn\'t work');
+  }
+}
 
 //event listener for filling the to-do list
 choresForm.addEventListener('submit', fillToDo);
