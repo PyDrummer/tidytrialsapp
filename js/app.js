@@ -18,6 +18,7 @@ var parsedRemovedArrayItem = JSON.parse(gotRemovedArrayItem);
 var resetButtonEl = document.getElementById('button');
 var gotChoreArray = localStorage.getItem('choreArrStored');
 var parsedChoreArray = JSON.parse(gotChoreArray);
+var retrieveUserPoints = localStorage.getItem('userPoints');
 
 
 // chore constructor
@@ -170,6 +171,8 @@ function handleToDoCompleted(event) {
     if (addedChores.item[i].chores === choreArray[j].chore) {
       console.log(`item instance chore name is, ${addedChores.item[i].chores} choreArray is at ${choreArray[j].chore}`);
       userPoints += choreArray[j].points; // maybe turn this into calling a fnction there?
+      var userPointsLocalStorage = JSON.stringify(userPoints);
+      localStorage.setItem('userPoints', userPointsLocalStorage);
 
       var toBeRemoved = document.getElementById(evId);
       toBeRemoved.innerHTML = '';
