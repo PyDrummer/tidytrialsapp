@@ -10,48 +10,41 @@
   <link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Faster+One&display=swap" rel="stylesheet">
 </head>
+<header>
+  <h1>Tidy Trials</h1>
+  <nav>
+    <ul>
+      <li><a href="../html/index.html">Home</a></li>
+      <li><a href="../html/aboutus.html">About Us</a></li>
+      <li><a href="../html/customize.html">Custom Page</a></li>
+    </ul>
+  </nav>
+</header>
 
 <body>
-
-  <header>
-    <h1>Tidy Trials</h1>
-    <nav>
-      <ul>
-        <li><a href="../html/home.html">Home</a></li>
-        <li><a href="../html/aboutus.html">About Us</a></li>
-        <li><a href="../html/customize.html">Custom Page</a></li>
-      </ul>
-    </nav>
-  </header>
-
-
-  
-
-  <section id="update_chores">
-
+  <section>
     <form id="updatePoints">
       <fieldset>
         <label>
-          <legend>This is where you can update the points of an existing chore!</legend>
           <span>Chore</span>
           <select id="chores"></select>
           <span>value</span>
           <select id="valueIndex"></select>
         </label>
-        <input type="submit" value="Click To Update The Points">
+        <input type="submit" value="Add to list">
       </fieldset>
     </form>
+    <ul id="choreDisplay"></ul>
   </section>
-  <section id="chores_creator">
+  <section>
     <form id="userChoreCreator">
       <fieldset>
         <label for="">
-          <legend>This is where you can add a new chore!</legend>
           <span>Chore name</span>
           <input type="text" id="choreName">
           <span>Point Value</span>
           <select id="pointValue"></select>
-          <input type="Click To Add Your Chore">
+          <input type="submit">
         </label>
       </fieldset>
     </form>
