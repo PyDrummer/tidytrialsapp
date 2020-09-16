@@ -2,6 +2,7 @@
 
 var choreArray = [];
 var removedArray = [];
+
 var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 var choreList = document.getElementById('chores_index');
 var dayList = document.getElementById('day_index');
@@ -10,7 +11,6 @@ var sectionTodo = document.getElementById('section_todo');
 var ul = document.getElementById('todo');
 var removedUl = document.getElementById('completed_ul');
 var completedUl = document.getElementById('completed_ul');
-var userPoints = 0; // this will be part of the constructor.
 var parsedAddedChoresItem = JSON.parse(localStorage.getItem('allAddedChoresItem'));
 var parsedLoopingInt = JSON.parse(localStorage.getItem('currentLoopingInt'));
 var gotRemovedArrayItem = localStorage.getItem('removedArrayItem');
@@ -18,8 +18,13 @@ var parsedRemovedArrayItem = JSON.parse(gotRemovedArrayItem);
 var resetButtonEl = document.getElementById('button');
 var gotChoreArray = localStorage.getItem('choreArrStored');
 var parsedChoreArray = JSON.parse(gotChoreArray);
-var retrieveUserPoints = localStorage.getItem('userPoints');
+var updateUser = localStorage.getItem('userObject');
+var loggedInUser = JSON.parse(updateUser);
+var bar = document.getElementById('demo1');
 
+if (loggedInUser) {
+  bar.setAttribute('value', loggedInUser[0].userPoints);
+}
 
 // chore constructor
 var Chores = function (chore, points) {
@@ -170,10 +175,11 @@ function handleToDoCompleted(event) {
     //console.log(addedChores.item[i].chores);
     if (addedChores.item[i].chores === choreArray[j].chore) {
       console.log(`item instance chore name is, ${addedChores.item[i].chores} choreArray is at ${choreArray[j].chore}`);
-      userPoints += choreArray[j].points; // maybe turn this into calling a fnction there?
-      var userPointsLocalStorage = JSON.stringify(userPoints);
-      localStorage.setItem('userPoints', userPointsLocalStorage);
-
+      loggedInUser[0].userPoints += choreArray[j].points;
+      bar.setAttribute('value', loggedInUser[0].userPoints);
+      console.log(loggedInUser[0]);
+      var userPointsLocalStorage = JSON.stringify(loggedInUser);
+      localStorage.setItem('userObject', userPointsLocalStorage);
       var toBeRemoved = document.getElementById(evId);
       toBeRemoved.innerHTML = '';
       console.log('i is ' + i);
@@ -188,7 +194,7 @@ function handleToDoCompleted(event) {
       console.log('removed array contennts' + removedArray);
       var removedArrayString = JSON.stringify(removedArray);
       localStorage.setItem('removedArrayItem', removedArrayString);
-      console.log(`user points currently at ${userPoints}`);
+      // console.log(`user points currently at ${userPoints}`);
 
       addedChores.item.splice([i], 1);
       //console.log('item that was removed' + removedArray); WORKS
