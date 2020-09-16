@@ -266,19 +266,23 @@ a:hover {
 /* ................................................................ */
 
 #updatePoints{
-  background-color: chartreuse;
+  /* background-color: chartreuse; */
   width: 485px;
 }
 #choreDisplay{
-  background-color: crimson;
+  background-color: #EBE8E3;
   width: 490px;
 }
 #userChoreCreator{
-  background-color: cyan;
+  /* background-color: cyan; */
+  position: relative;
 }
 #choreMaker{
-  background-color: cyan;
-  
+  text-align: center;
+  /* background-color: cyan; */
+  height: 200px;
+  width: 500px;
+  margin: auto;
 }
 
 /* ................................................................ */
