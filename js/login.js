@@ -7,8 +7,6 @@ var registerUserForm = document.getElementById('registerUserForm');
 var currentUser = [];
 //var myFormNewUser = document.getElementById('newUserForm');
 
-
-
 function Users(name) {
   this.name = name;
   this.userPoints = 0;
@@ -52,7 +50,7 @@ function login(event) {
           console.log(currentUser);
         }
       }
-      window.location.replace('https://pydrummer.github.io/tidytrialsapp/html/home.html');
+      window.location.replace('');
 
       break;
     } else {
@@ -84,10 +82,5 @@ function registerUser(event) {
 
 
 // new Users('xyz');
-
-
-
-
-
 loginForm.addEventListener('submit', login);
 registerUserForm.addEventListener('submit', registerUser);

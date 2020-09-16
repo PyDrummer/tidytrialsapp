@@ -7,12 +7,27 @@ var userCreatesChore = document.getElementById('userChoreCreator');
 var createPointAssignment = document.getElementById('pointValue');
 var displayUl = document.getElementById('choreDisplay');
 var li;
-var check = 0;
 var gotChoreArray = localStorage.getItem('choreArrStored');
 var parsedChoreArray = JSON.parse(gotChoreArray);
+var choreArray = [];
+
+var Chores = function (chore, points) {
+  this.chore = chore;
+  this.points = points;
+  choreArray.push(this);
+};
 
 if (parsedChoreArray) {
   choreArray = parsedChoreArray;
+} else {
+  // hard coded chores list with values.
+  new Chores('sweep', 1);
+  new Chores('mop', 2);
+  new Chores('dishes', 5);
+  new Chores('dusting', 2);
+  new Chores('laundry', 6);
+  new Chores('mow lawn', 7);
+  new Chores('collect leaves', 3);
 }
 
 // update point value to whatever user puts in with event listener.

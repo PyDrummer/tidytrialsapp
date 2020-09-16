@@ -26,6 +26,7 @@ if (loggedInUser) {
   bar.setAttribute('value', loggedInUser[0].userPoints);
 }
 
+
 // chore constructor
 var Chores = function (chore, points) {
   this.chore = chore;
@@ -44,7 +45,6 @@ if (parsedChoreArray) {
   new Chores('laundry', 6);
   new Chores('mow lawn', 7);
   new Chores('collect leaves', 3);
-
 }
 
 // fills index.html dropdown menus
