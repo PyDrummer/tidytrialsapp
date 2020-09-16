@@ -186,7 +186,6 @@ progress{
 }
  
 
-
 /* ................................................................ */
 /* ABOUT US SECTION*/
 /* Saved room to change each color of each box so we can customize our float color - also room to add stats like a baseball card/old vidyagame.
@@ -229,6 +228,7 @@ a:hover {
   background-color: chartreuse;
 }
 
+
 /* ................................................................ */
 /* Landing Page */
 /* Going to add more style to landing page, needs to be linked to rest of code base. Also going to add animations to landing page.
@@ -251,7 +251,6 @@ a:hover {
   text-shadow: 1px 1px 1px black;
   box-shadow: 2px 2px 2px black;
 }
-
 #landingAnimation{
   margin-top: 200px;
   box-shadow: 15px 5px 50px 3px;
@@ -262,6 +261,28 @@ a:hover {
   0%   {top: 700px;}
   100% {top: 0px;}
 }
+/* ................................................................ */
+/* CUSTOMIZE PAGE */
+/* ................................................................ */
+
+#updatePoints{
+  background-color: chartreuse;
+  width: 485px;
+}
+#choreDisplay{
+  background-color: crimson;
+  width: 490px;
+}
+#userChoreCreator{
+  background-color: cyan;
+}
+#choreMaker{
+  background-color: cyan;
+  
+}
+
+/* ................................................................ */
+/* ................................................................ */
 /* ................................................................ */
 /* ................................................................ */
 /* ................................................................ */
