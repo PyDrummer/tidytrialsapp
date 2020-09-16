@@ -1,5 +1,6 @@
 'use strict';
 
+// All globally scoped variables
 var chore = document.getElementById('chores');
 var pointValue = document.getElementById('valueIndex');
 var choreArrStr;
@@ -10,13 +11,16 @@ var li;
 var gotChoreArray = localStorage.getItem('choreArrStored');
 var parsedChoreArray = JSON.parse(gotChoreArray);
 var choreArray = [];
+var customizeDropDown = document.getElementById('updatePoints');
 
+// Chore object constructor for creating second set of chores for use in points value changes and chore creation (tied into app.js local storage through variable name)
 var Chores = function (chore, points) {
   this.chore = chore;
   this.points = points;
   choreArray.push(this);
 };
 
+// Creates choreArray from local storage or new insances of Chores
 if (parsedChoreArray) {
   choreArray = parsedChoreArray;
 } else {
@@ -30,15 +34,12 @@ if (parsedChoreArray) {
   new Chores('collect leaves', 3);
 }
 
-// update point value to whatever user puts in with event listener.
-var customizeDropDown = document.getElementById('updatePoints');
+// Updates point value of chosen chore to whatever user puts in with event listener.
 function updatePointValue(event) {
   event.preventDefault();
   removeChoreDisplay();
-  console.log('update');
   for (var i = 0; i < choreArray.length; i++) {
     if (event.target.chores.value === choreArray[i].chore) {
-      // update point value
       choreArray[i].points = parseInt(event.target.valueIndex.value);
       break;
     }
@@ -47,7 +48,7 @@ function updatePointValue(event) {
   storeChoreArr();
 }
 
-// fills customize.html dropdown menus
+// Fills customize.html dropdown menus
 function fillCustDropDown() {
   for (var i = 0; i < choreArray.length; i++) {
     var option = document.createElement('option');
@@ -62,7 +63,7 @@ function fillCustDropDown() {
 }
 fillCustDropDown();
 
-// fills chore creator point value drop down
+// Fills chore creator point value drop down
 function fillCreatorDropDown() {
   for (var i = 0; i < 10; i++) {
     var option = document.createElement('option');
@@ -72,25 +73,25 @@ function fillCreatorDropDown() {
 }
 fillCreatorDropDown();
 
-// allows user to create new chore and assign values
+// Allows user to create new chore and assign values
 function userChoreCreation(event) {
   event.preventDefault();
   removeChoreDisplay();
   var choreName = event.target.choreName.value;
   var points = parseInt(event.target.pointValue.value);
-  console.log('yes1');
   new Chores(choreName, points);
   choreDisplay();
   storeChoreArr();
   location.reload();
 }
 
-// sets choreArray to local storage
+// Sets choreArray to local storage
 function storeChoreArr() {
   choreArrStr = JSON.stringify(choreArray);
   localStorage.setItem('choreArrStored', choreArrStr);
 }
 
+// Displays chores available for customization on page load, after new chore is created and after point value is changed
 function choreDisplay() {
   for (var i = 0; i < choreArray.length; i++) {
     li = document.createElement('li');
@@ -99,15 +100,15 @@ function choreDisplay() {
     displayUl.append(li);
   }
 }
+choreDisplay();
 
+// Clears chore display in order to collapse li and provide space for new set when new chore is created or point value is changed
 function removeChoreDisplay() {
   for (var i = 0; i < choreArray.length; i++) {
     var liItem = document.getElementById('chore' + i);
     liItem.innerHTML = '';
   }
 }
-
-choreDisplay();
 
 // listens for creation of chore
 userCreatesChore.addEventListener('submit', userChoreCreation);

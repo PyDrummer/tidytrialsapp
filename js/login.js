@@ -1,57 +1,48 @@
 'use strict';
 
+// All globally scoped variables
 var usersNameArray = ['dasad'];
 var usersArray = [];
 var loginForm = document.getElementById('loginForm');
 var registerUserForm = document.getElementById('registerUserForm');
 var currentUser = [];
-//var myFormNewUser = document.getElementById('newUserForm');
+var retrieveUser = localStorage.getItem('users');
+var retrieveUserName = localStorage.getItem('usersName');
 
+// User object constructor
 function Users(name) {
   this.name = name;
   this.userPoints = 0;
   usersArray.push(this);
 }
 
-var retrieveUser = localStorage.getItem('users');
+// Fills usersArray from local storage or new instances
 if (retrieveUser) {
   usersArray = JSON.parse(retrieveUser);
 } else {
   new Users('xyz');
 }
 
-// var retrieveUser = localStorage.getItem('users');
-// if (retrieveUser) {
-//   usersArray = JSON.parse(retrieveUser);
-// }
-
-var retrieveUserName = localStorage.getItem('usersName');
+// Fills userNameArray from local storage
 if (retrieveUserName) {
   usersNameArray = JSON.parse(retrieveUserName);
 }
 
-
+// 201 level user login (no password)
 function login(event) {
   event.preventDefault();
   var loginUser = event.target.username.value;
-  //console.log('log1', loginUser);
   for (var i = 0; i < usersNameArray.length; i++) {
-    //console.log('log2', usersNameArray);
     if (usersNameArray.includes(loginUser)) {
-      console.log('log3',usersNameArray.includes(loginUser));
       alert(`Welcome Back ${loginUser}`);
-
       for (var j = 0; j < usersArray.length; j++) {
-        console.log(loginUser);
         if (loginUser === usersArray[j].name) {
           currentUser.push(usersArray[j]);
           var userStr = JSON.stringify(currentUser);
           localStorage.setItem('userObject', userStr);
-          console.log(currentUser);
         }
       }
       window.location.replace('');
-
       break;
     } else {
       alert('Not a Valid Username');
@@ -61,6 +52,7 @@ function login(event) {
   loginForm.reset();
 }
 
+// Creates new user for login
 function registerUser(event) {
   event.preventDefault();
   var loginUser = event.target.username.value;
@@ -72,7 +64,6 @@ function registerUser(event) {
       break;
     }
   }
-  console.log(usersNameArray);
   registerUserForm.reset();
   var stringUsersArray = JSON.stringify(usersArray);
   localStorage.setItem('users', stringUsersArray);
@@ -80,7 +71,7 @@ function registerUser(event) {
   localStorage.setItem('usersName', stringUsersNameArray);
 }
 
-
-// new Users('xyz');
+// Listens for login
 loginForm.addEventListener('submit', login);
+// Listens for user creation
 registerUserForm.addEventListener('submit', registerUser);
