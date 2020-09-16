@@ -42,6 +42,7 @@ function login(event) {
     if (usersNameArray.includes(loginUser)) {
       console.log('log3',usersNameArray.includes(loginUser));
       alert(`Welcome Back ${loginUser}`);
+
       for (var j = 0; j < usersArray.length; j++) {
         console.log(loginUser);
         if (loginUser === usersArray[j].name) {
@@ -51,7 +52,8 @@ function login(event) {
           console.log(currentUser);
         }
       }
-      window.location.replace('');
+      window.location.replace('https://pydrummer.github.io/tidytrialsapp/html/home.html');
+
       break;
     } else {
       alert('Not a Valid Username');
