@@ -217,8 +217,9 @@ createResetButton();
 // Clears lists when onclick of reset button
 function resetHandler(e) {
   if (e.target === resetButtonEl) {
-    alert('You\'ve Reset All The Chores Data!');
-    localStorage.clear();
+    alert('You\'ve Reset The Completed Chores and Progress Bar!');
+    //localStorage.clear();
+    localStorage.removeItem('removedArrayItem');
     location.reload();
   } else {
     alert('It didn\'t work');
