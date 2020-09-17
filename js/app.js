@@ -1,8 +1,8 @@
 'use strict';
 
+// all globally scoped variables
 var choreArray = [];
 var removedArray = [];
-
 var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 var choreList = document.getElementById('chores_index');
 var dayList = document.getElementById('day_index');
@@ -21,19 +21,22 @@ var parsedChoreArray = JSON.parse(gotChoreArray);
 var updateUser = localStorage.getItem('userObject');
 var loggedInUser = JSON.parse(updateUser);
 var bar = document.getElementById('demo1');
+var evId;
+var use;
 
+// Updates progress bar on page load
 if (loggedInUser) {
   bar.setAttribute('value', loggedInUser[0].userPoints);
 }
 
-
-// chore constructor
+// Chore constructor
 var Chores = function (chore, points) {
   this.chore = chore;
   this.points = points;
   choreArray.push(this);
 };
 
+// Fills choreArray with chore objects for use throughout code
 if (parsedChoreArray) {
   choreArray = parsedChoreArray;
 } else {
@@ -61,9 +64,10 @@ function fillDropDown() {
 
 fillDropDown();
 
-// -------------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------
 // All these constructors have to be below the stuff above for it to work
 
+// Constructor used as reference for appending todo items
 var AddDayToChores = function (chores, day, content, id) {
   this.chores = chores;
   this.day = day;
@@ -71,49 +75,46 @@ var AddDayToChores = function (chores, day, content, id) {
   this.id = id;
 };
 
-// item is a blank array.
+// item is a blank array here, but fills with AddDayToChores objects.
 var ChoreAndDay = function (item) {
   this.item = item;
 };
 
+// prepares to instantiate AddDayToChores and push into item array
 ChoreAndDay.prototype.addItem = function (chores, day, content, id) {
   var newChoreAndDay = new AddDayToChores(chores, day, content, id);
   this.item.push(newChoreAndDay);
 };
 
-// ---- All the constructors above need to work before addedChores works. ------
-// chore and day object stored in addedChores
+// Constructor stored as variables for use in placing lines in todo list and moving to completed list
 var addedChores = new ChoreAndDay([]);
 var removedChores = new ChoreAndDay([]);
 
-// instanciating previously stored added chores
+// Uses local storage to instanciate previously stored addedChores
 if (parsedAddedChoresItem) {
   for (var j = 0; j < parsedAddedChoresItem.length; j++) {
     addedChores.addItem(parsedAddedChoresItem[j].chores, parsedAddedChoresItem[j].day, parsedAddedChoresItem[j].content, parsedAddedChoresItem[j].id);
   }
-  console.log(addedChores);
 }
 
-//instanciating previously removed chores
+// Uses local storage to instanciate previously removedChores
 if (parsedRemovedArrayItem) {
   for (var int = 0; int < parsedRemovedArrayItem.length; int++) {
     removedChores.addItem(parsedRemovedArrayItem[int].chores, parsedRemovedArrayItem[int].day, parsedRemovedArrayItem[int].content, parsedRemovedArrayItem[int].id);
   }
-  console.log(removedChores);
 }
 
-// infinite looper!
+// Infinitely looping variable for assigning id to todo items
 var loopingInt = 1;
 if (parsedLoopingInt) {
   loopingInt = parsedLoopingInt;
 }
 
+// Assigns ID and content to chore objects for use in creating todo list items
 function fillToDo(event) {
   event.preventDefault();
   var choreName = event.target.chores_index.value;
-  //console.log('chorename ' + choreName);
   var daySelection = event.target.day_index.value;
-  //console.log('dayselection ' + daySelection);
   for (var i = 0; i < loopingInt + 1; i++) {
     var idName = choreName + loopingInt;
     loopingInt++;
@@ -121,19 +122,12 @@ function fillToDo(event) {
     localStorage.setItem('currentLoopingInt', loopingIntStringed);
     break;
   }
-  //console.log('id name ' + idName);
   var content = `${choreName} should be done ${daySelection}`;
-  //console.log(content + 'Content');
   addedChores.addItem(choreName, daySelection, content, idName);
-  //console.log('addedchores array ' + addedChores.item[0].chores); //this works
   postToDoList();
 }
-//-----------------------------------------------
 
-// add another render method for the stuff in local storage.
-// seperate local storage array, add the new items to that.
-
-//render addedChores array
+// Creates todo list on page load
 function renderAddedChoresArray() {
   for (var i = 0; i < addedChores.item.length; i++) {
     var liEl = document.createElement('li');
@@ -144,6 +138,7 @@ function renderAddedChoresArray() {
 }
 renderAddedChoresArray();
 
+// Renders todo list to page
 function postToDoList() {
   var li = document.createElement('li');
   var i = addedChores.item.length - 1;
@@ -155,61 +150,41 @@ function postToDoList() {
   localStorage.setItem('allAddedChoresItem', addedChoresItemStringified);
 }
 
-
-//-----------------------------
-var evId;
+// Prepares to move chosen todo list item to completed list
+// Updates user points for use in progress bar
 function handleToDoCompleted(event) {
-  // thing 1, take it out
-  // thing 2, get the chore (name) and the choreArray.chore, grab the points assoiacted with that. Send that to a points global variable.
   evId = event.target.id;
-  console.log(evId);
   for (var i = 0; i < addedChores.item.length; i++) {
-    //console.log(event.target.id);
     if (evId === addedChores.item[i].id) {
-      //console.log(`item instance chore name is, ${addedChores.item[i].id}`);
-      // console.log(i);
       break;
     }
   }
   for (var j = 0; j < choreArray.length; j++) {
-    //console.log(addedChores.item[i].chores);
     if (addedChores.item[i].chores === choreArray[j].chore) {
-      console.log(`item instance chore name is, ${addedChores.item[i].chores} choreArray is at ${choreArray[j].chore}`);
       loggedInUser[0].userPoints += choreArray[j].points;
       bar.setAttribute('value', loggedInUser[0].userPoints);
-      console.log(loggedInUser[0]);
       var userPointsLocalStorage = JSON.stringify(loggedInUser);
       localStorage.setItem('userObject', userPointsLocalStorage);
       var toBeRemoved = document.getElementById(evId);
       toBeRemoved.innerHTML = '';
-      console.log('i is ' + i);
-
       // This will move all the parsed stuff into removedArray before it gets over written.
       if (parsedRemovedArrayItem) {
         removedArray = parsedRemovedArrayItem;
       }
       moveToCompleted();
-
       removedArray.push(addedChores.item[i]); // this works
-      console.log('removed array contennts' + removedArray);
       var removedArrayString = JSON.stringify(removedArray);
       localStorage.setItem('removedArrayItem', removedArrayString);
-      // console.log(`user points currently at ${userPoints}`);
-
       addedChores.item.splice([i], 1);
-      //console.log('item that was removed' + removedArray); WORKS
-      //console.log('current added chores array ', addedChores); WORKS
-
       // updating the local storage.
       var addedChoresItemStringified = JSON.stringify(addedChores.item);
       localStorage.setItem('allAddedChoresItem', addedChoresItemStringified);
-
       break;
     }
   }
 }
 
-var use; // this will contain the chore and day content.
+// Renders completed items to completed list
 function moveToCompleted() {
   for (var i = 0; i < addedChores.item.length; i++) {
     if (addedChores.item[i].id === evId) {
@@ -221,7 +196,7 @@ function moveToCompleted() {
   completedUl.append(li);
 }
 
-//render removedChores array
+// Renders completed list on page load
 function renderRemovedArray() {
   for (var j = 0; j < removedChores.item.length; j++) {
     var liElTwo = document.createElement('li');
@@ -232,23 +207,26 @@ function renderRemovedArray() {
 }
 renderRemovedArray();
 
+// Creates button to empty lists
 function createResetButton() {
   resetButtonEl.textContent = 'Click to Reset';
   resetButtonEl.addEventListener('click', resetHandler);
 }
 createResetButton();
 
+// Clears lists when onclick of reset button
 function resetHandler(e) {
-  console.log(e.target, resetButtonEl);
   if (e.target === resetButtonEl) {
-    alert('You\'ve Reset All The Chores Data!');
-    localStorage.clear();
+    alert('You\'ve Reset The Completed Chores and Progress Bar!');
+    //localStorage.clear();
+    localStorage.removeItem('removedArrayItem');
     location.reload();
   } else {
     alert('It didn\'t work');
   }
 }
 
-//event listener for filling the to-do list
+// Event listener for filling the to-do list
 choresForm.addEventListener('submit', fillToDo);
+// Event listener for moving todo list items to completed list
 sectionTodo.addEventListener('click', handleToDoCompleted);
